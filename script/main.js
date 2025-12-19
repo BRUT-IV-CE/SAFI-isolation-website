@@ -146,87 +146,7 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-const contactForm = document.getElementById('contactForm');
-const formMessage = document.getElementById('formMessage');
-
-if (contactForm) {
-    contactForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        const honeypot = document.getElementById('website').value;
-        if (honeypot !== '') {
-            console.log('Spam détecté');
-            return;
-        }
-        
-        const formData = {
-            name: document.getElementById('name').value.trim(),
-            email: document.getElementById('email').value.trim(),
-            phone: document.getElementById('phone').value.trim(),
-            service: document.getElementById('service').value,
-            message: document.getElementById('message').value.trim()
-        };
-        
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(formData.email)) {
-            showFormMessage('Veuillez entrer une adresse email valide.', 'error');
-            return;
-        }
-        
-        if (!formData.name || !formData.email || !formData.message) {
-            showFormMessage('Veuillez remplir tous les champs obligatoires.', 'error');
-            return;
-        }
-        
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalText = submitBtn.textContent;
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Envoi en cours...';
-        
-        try {
-            const response = await fetch('https://api.web3forms.com/submit', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    access_key: 'VOTRE_CLE_API_WEB3FORMS_ICI',
-                    name: formData.name,
-                    email: formData.email,
-                    phone: formData.phone,
-                    subject: `Nouveau contact - Service: ${formData.service}`,
-                    message: `Service demandé: ${formData.service}\n\nMessage:\n${formData.message}`
-                })
-            });
-            
-            const result = await response.json();
-            
-            if (result.success) {
-                showFormMessage('Votre message a été envoyé avec succès ! Nous vous recontacterons rapidement.', 'success');
-                contactForm.reset();
-            } else {
-                throw new Error('Erreur lors de l\'envoi');
-            }
-            
-        } catch (error) {
-            console.error('Erreur:', error);
-            showFormMessage('Une erreur est survenue. Veuillez réessayer ou nous contacter par téléphone.', 'error');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = originalText;
-        }
-    });
-}
-
-function showFormMessage(message, type) {
-    formMessage.textContent = message;
-    formMessage.className = `form-message ${type}`;
-    formMessage.style.display = 'block';
-    
-    setTimeout(() => {
-        formMessage.style.display = 'none';
-    }, 5000);
-}
+// Form handling removed (no form present in markup)
 
 const observerOptions = {
     threshold: 0.1,
@@ -383,5 +303,5 @@ window.addEventListener('load', () => {
     }, 100);
 });
 
-console.log('🪵 Damien Parquets - Site initialisé avec succès ✓');
+console.log('SAFI - Site initialisé avec succès ✓');
 console.log('🌙 Dark mode disponible - Cliquez sur le bouton en bas à droite');
