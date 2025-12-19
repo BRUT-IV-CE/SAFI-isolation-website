@@ -556,8 +556,10 @@ body {
     background-color: var(--card-bg);
     padding: var(--spacing-lg);
     border-radius: var(--radius-lg);
-    max-width: 600px;
+    max-width: 800px;
     width: 90%;
+    max-height: 90vh;
+    overflow: auto;
     position: relative;
     animation: slideIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
@@ -612,6 +614,76 @@ body {
     font-size: 1.1rem;
     line-height: 1.9;
     color: var(--text-secondary);
+}
+
+/* Modal-specific responsive rules */
+.modal .materials-photos {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.modal .materials-photos .material-photo {
+    flex: 1 1 220px;
+    width: 100%;
+    max-width: calc(50% - 0.5rem);
+    height: auto;
+    box-sizing: border-box;
+    border-radius: 6px;
+    object-fit: cover;
+    display: block;
+    box-shadow: 0 6px 18px var(--shadow-color);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.modal .materials-photos .material-photo:focus,
+.modal .materials-photos .material-photo:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+}
+
+@media (max-width: 900px) {
+    .modal-content {
+        padding: var(--spacing-md);
+        width: 95%;
+        max-width: 720px;
+    }
+    .modal-title {
+        font-size: 1.6rem;
+    }
+    .modal-text {
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+}
+
+@media (max-width: 480px) {
+    .modal-content {
+        padding: 1rem;
+        width: 98%;
+        border-radius: 12px;
+    }
+    .modal .materials-photos {
+        flex-direction: row;
+        gap: 0.5rem;
+        align-items: stretch;
+        justify-content: center;
+    }
+    .modal .materials-photos .material-photo {
+        flex: 1 1 48%;
+        max-width: 48%;
+        width: 48%;
+        height: auto;
+        display: block;
+    }
+    .modal-close {
+        top: 0.5rem;
+        right: 0.5rem;
+        width: 36px;
+        height: 36px;
+        font-size: 1.6rem;
+    }
 }
 
 .gallery {
